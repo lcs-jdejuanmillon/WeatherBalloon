@@ -27,15 +27,15 @@ struct ContentView: View {
     }
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 10) {
-                Text("The altitude A (in meters above the ground) at hour t after launching is:")
-                Text("A = -6t4 + ht3 + 2t2 + t")
-                Text("Value of h:")
+            VStack(alignment: .leading, spacing: 5) {
+                Text("The altitude A (in meters above the ground) at hour t after launching is given by the following equation:")
                 HStack {
                     Spacer()
-                    Text("\(inth)")
+                    Text("A = -6t4 + ht3 + 2t2 + t")
                     Spacer()
                 }
+                Text("Value of h:")
+                    .padding(.top, 15)
                 Slider(value: $h,
                        in: 0...100,
                        step: 1.0,
@@ -48,12 +48,15 @@ struct ContentView: View {
                        maximumValueLabel: {
                     Text("100")
                 })
-                Text("Value of M:")
                 HStack {
                     Spacer()
-                    Text("\(intM)")
+                    Text("\(inth)")
+                        .bold()
+                        .font(.title3)
                     Spacer()
                 }
+                Text("Value of M:")
+                    .padding(.top, 15)
                 Slider(value: $M,
                        in: 1...239,
                        step: 1.0,
@@ -66,18 +69,29 @@ struct ContentView: View {
                        maximumValueLabel: {
                     Text("239")
                 })
+                HStack {
+                    Spacer()
+                    Text("\(intM)")
+                        .bold()
+                        .font(.title3)
+                    Spacer()
+                }
                 Text(touchesGround == 0 ? "The balloon does not touch ground in the given time." : """
                     The balloon first touches ground at hour:
                     \(touchesGround)
                     """)
+                    .padding(.top, 15)
             }
         }
         .padding()
+        .navigationTitle("Weather Balloon")
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        NavigationView {
+            ContentView()
+        }
     }
 }
